@@ -24,6 +24,11 @@ const SignUpPage = () => {
 
       Meteor.call('createNewUser', {userName:userName, userEmail:userEmail, userPwd:userPwd}, (err, res) => {
         if (err) {
+          userName=useState('');
+          userEmail=useState('');
+          userPwd=useState('');
+          confirmPwd=useState('');
+
           console.log('Sign up error:', err)
 
           if (err.reason = 'Email already exists.') {
@@ -39,11 +44,15 @@ const SignUpPage = () => {
         }
 
         if (res === 'User already logged') {
+          alert('User already registered');
           console.log('User already registered')
           return false
         }
 
-        if (res === 'New user created') console.log('New user successfully created')
+        if (res === 'New user created') {
+          alert('New user successfully created');
+          console.log('New user successfully created')
+        }
 
         return window.location.href = '/'
       })

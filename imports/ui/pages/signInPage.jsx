@@ -1,10 +1,16 @@
 import React, { useState } from 'react'
 import { Meteor } from 'meteor/meteor'
+import { Session } from 'meteor/session'
 
 // import 'bootstrap/dist/css/bootstrap.css';
 // import '../../main.css'
 
-const SignInPage = () => {
+const SignInPage = (props) => {
+
+    console.log(props);
+
+    console.log(Meteor.isClient);
+    console.log(Meteor.isServer);
 
     // Form fields states
     const [userEmail, setUserEmail] = useState('')

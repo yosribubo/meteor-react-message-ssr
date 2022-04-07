@@ -45,6 +45,17 @@
   text-align: center;
 }
 
+.logout {
+  padding: 15px;
+  text-align: right;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.logout > a {
+  text-decoration-line: none;
+}
+
 /* On screens that are 992px or less, set the background color to blue */
 @media screen and (max-width: 992px) {
     .login-form {

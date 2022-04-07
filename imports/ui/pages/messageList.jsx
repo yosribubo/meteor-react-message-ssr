@@ -1,12 +1,16 @@
-import React from 'react'
+
+import { Meteor } from 'meteor/meteor';
+import React, { Fragment } from 'react'
 import { useTracker } from 'meteor/react-meteor-data';
 import { messageCollection } from '/imports/api/messageCollection'
 import { Message } from './message';
 import { MessageInForm } from './mesageInForm';
+import { Link } from 'react-router-dom';
+import { Session } from 'meteor/session'
 
 // import 'bootstrap/dist/css/bootstrap.css'
 
-const MessageList = () => {
+const MessageList = (props) => {
     const messages = useTracker(
         () => messageCollection.find({}, { sort: {createdAt: -1} }).fetch()
     );
@@ -16,6 +20,9 @@ const MessageList = () => {
     return (
         <div className='main'>
             <div className='container'>
+                <div className='header logout'>
+                    <Link to="/">LogOut</Link>
+                </div>
                 <div className="banner">
                     <h1>Welcome to Meteor & React</h1>
                     <p>You can send message and show message list</p>
@@ -37,7 +44,6 @@ const MessageList = () => {
                     </div>
                 )
                 }
-                
             </div>
         </div>
     );
