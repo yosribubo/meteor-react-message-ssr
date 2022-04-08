@@ -7,11 +7,6 @@ import { Session } from 'meteor/session'
 
 const SignInPage = (props) => {
 
-    console.log(props);
-
-    console.log(Meteor.isClient);
-    console.log(Meteor.isServer);
-
     // Form fields states
     const [userEmail, setUserEmail] = useState('')
     const [userPwd, setUserPwd] = useState('')

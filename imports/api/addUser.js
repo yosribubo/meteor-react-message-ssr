@@ -1,5 +1,6 @@
 import { Meteor } from 'meteor/meteor'
 import { Accounts } from 'meteor/accounts-base'
+import { Router } from 'react-router-dom';
 
 Meteor.methods({
   'createNewUser': (param) => {
@@ -27,4 +28,13 @@ Meteor.methods({
       return res
     }
   },
+  'userLoggedIn': () => {
+    const userId = Meteor.userId();
+    if (userId) {
+      return true;
+    } else {
+      return false;
+    }
+  },
+ 
 });

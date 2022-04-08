@@ -1,27 +1,41 @@
 
 import { Meteor } from 'meteor/meteor';
 import React, { Fragment } from 'react'
+import { browserHistory } from 'react-router';
 import { useTracker } from 'meteor/react-meteor-data';
 import { messageCollection } from '/imports/api/messageCollection'
 import { Message } from './message';
 import { MessageInForm } from './mesageInForm';
-import { Link } from 'react-router-dom';
-import { Session } from 'meteor/session'
-
-// import 'bootstrap/dist/css/bootstrap.css'
+import { Link, Redirect, Router } from 'react-router-dom';
 
 const MessageList = (props) => {
     const messages = useTracker(
         () => messageCollection.find({}, { sort: {createdAt: -1} }).fetch()
     );
 
+    this.props = props;
+
     const counts = messages.length;
+    const logged = false;
+
+    Meteor.call('userLoggedIn', (err, res) => {
+        this.logged = res;
+        if (!res) this.props.history.push("/");
+    });
+
+    const handleLogout = (e) => {
+        e.preventDefault();
+        Meteor.logout(() =>{
+            this.props.history.push('/');
+       });
+    }
+
 
     return (
         <div className='main'>
             <div className='container'>
                 <div className='header logout'>
-                    <Link to="/">LogOut</Link>
+                    <Link onClick={handleLogout}>LogOut</Link>
                 </div>
                 <div className="banner">
                     <h1>Welcome to Meteor & React</h1>
@@ -44,6 +58,7 @@ const MessageList = (props) => {
                     </div>
                 )
                 }
+                
             </div>
         </div>
     );
